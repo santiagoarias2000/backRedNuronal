@@ -45,7 +45,8 @@ app = FastAPI()
 origins =[
     'http://localhost',
     'http://localhost:8089',
-    'http://localhost:8090'
+    'http://localhost:8090',
+    'https://movieflow-1e1cb.firebaseapp.com/'
 ]
 app.add_middleware(
     CORSMiddleware,
