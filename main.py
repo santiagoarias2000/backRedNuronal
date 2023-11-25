@@ -43,10 +43,8 @@ def insertar_libro(libro: libros):
 '''
 app = FastAPI()
 origins =[
-    'http://localhost',
-    'http://localhost:8089',
-    'http://localhost:8090',
-    'https://movieflow-1e1cb.firebaseapp.com/'
+    'https://movieflow-1e1cb.firebaseapp.com/',
+    'https://movieflow-1e1cb.web.app/'
 ]
 app.add_middleware(
     CORSMiddleware,
