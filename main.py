@@ -4,6 +4,7 @@ from typing import Optional
 import uvicorn
 from app.routes import movie
 from app.neural_network import recomendadorMovie
+from app.neural_network import topPelicula
 from app.db.database import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -43,7 +44,8 @@ def insertar_libro(libro: libros):
 app = FastAPI()
 origins =[
     'http://localhost',
-    'http://localhost:8089'
+    'http://localhost:8089',
+    'http://localhost:8090'
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -54,6 +56,7 @@ app.add_middleware(
 )
 app.include_router(movie.router)
 app.include_router(recomendadorMovie.router)
+app.include_router(topPelicula.router)
 movies = []
 
 if __name__ == "__main__":

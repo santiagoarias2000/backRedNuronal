@@ -66,8 +66,8 @@ def get_movie_recommendations_endpoint(movie_id: int):
     try:
         recommendations = get_movie_recommendations(movie_id)
     except:
-        return {"message":"No te podemos recomendar peliculas"}
-    return {"movie_id": movie_id, "recommendations": recommendations.to_dict(orient="records")}
+        return {"message": "No te podemos recomendar peliculas"}
+    return recommendations.to_dict(orient="records")
 
 
 # Ruta para obtener detalles de una película específica

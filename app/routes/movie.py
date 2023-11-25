@@ -12,29 +12,26 @@ router = APIRouter(
 movies = []
 
 
-@router.get("/hola")
-def ruta1():
-    return {"message": "Bienvenido"}
-
-
 @router.get("/view_movies")
 def get_movies(db: Session = Depends(get_db)):
     data = db.query(models.Movies).all()
-    movies_list = [{"id": movie.id, "name": movie.name, "genre": movie.gender, "image":movie.image} for movie in data]
+    movies_list = [{"id": movie.id, "name": movie.name, "genre": movie.gender, "image": movie.image} for movie in data]
     return movies_list
 
 
 @router.get("/view_movies_pag")
 def get_movies(page: int = 1, page_size: int = 30, db: Session = Depends(get_db)):
-    # page = int(requests.args.get('page', 1))
-    # page_size = int(requests.args.get('page_size', 10))
-
     start_index = (page - 1) * page_size
     end_index = start_index + page_size
-
     data = db.query(models.Movies).slice(start_index, end_index).all()
+    movies_list = []
 
-    movies_list = [{"id": movie.id, "name": movie.name, "genre": movie.gender, "image":movie.image} for movie in data]
+    for movie in data:
+        if movie.image:
+            movies_list.append({"id": movie.id, "name": movie.name, "genre": movie.gender, "image": movie.image})
+        else:
+            print(f"Pelicula {movie.id} no cuenta con imagen")
+
     return movies_list
 
 
